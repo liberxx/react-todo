@@ -6,17 +6,14 @@ import Button from '../Button';
 import './styles.scss';
 
 interface Props {
-  submitChanges: (task: Task | EditableTask) => void,
-  editableTask: EditableTask | null
+  submitChanges: (task: Task) => void,
+  editableTask: Task | null
 }
 
 interface Task {
   taskName: string,
   description: string,
-}
-
-interface EditableTask extends Task {
-  index: number | null
+  id: number | null
 }
 
 function TaskEditor ({ submitChanges, editableTask } : Props) {
@@ -34,9 +31,9 @@ function TaskEditor ({ submitChanges, editableTask } : Props) {
   }, [editableTask])
   const handleTaskNameChange = (e: any) => setTaskName(e.target.value);
   const handleDescriptionChange = (e: any) => setDescription(e.target.value);
-  const addTask = () => {
+  const saveTask = () => {
     if (!taskName) return
-    submitChanges({ taskName, description, index: editableTask ? editableTask.index : null });
+    submitChanges({ taskName, description, id: editableTask ? editableTask.id : null });
     setTaskName('');
     setDescription('');
   }
@@ -47,7 +44,7 @@ function TaskEditor ({ submitChanges, editableTask } : Props) {
         <Textarea placeholder='Описание задачи' value={description} onChange={handleDescriptionChange} />
       </div>
       <div className='task-editor__buttons'>
-        <Button onClick={addTask}>
+        <Button onClick={saveTask}>
           {editableTask ? 'Сохранить изменения' : 'Создать задачу'}
         </Button>
       </div>

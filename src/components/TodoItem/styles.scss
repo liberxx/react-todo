@@ -1,0 +1,41 @@
+.todoitem {
+  width: 100%;
+  display: flex;
+  padding: 5px 0 5px 0;
+  margin-bottom: 20px;
+}
+
+.todoitem__content {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+
+  span:first-child {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  span:last-child {
+    font-size: 16px;
+    font-style: italic;
+  }
+}
+
+.todoitem__buttons {
+  display: flex;
+  align-items: center;
+  span {
+    cursor: pointer;
+    width: 50px;
+    font-size: 50px;
+    text-align: center;
+  }
+
+  span:hover {
+    color: #0066ff;
+  }
+
+  span:first-child {
+    margin-right: 15px;
+  }
+}

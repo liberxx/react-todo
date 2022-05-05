@@ -1,0 +1,15 @@
+.task-editor {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & .task-editor__fields {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+  }
+
+  & .task-editor__buttons {
+    margin-top: 10px;
+  }
+}

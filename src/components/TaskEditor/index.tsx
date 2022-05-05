@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Input from '../Input';
 import Textarea from '../Textarea';
@@ -6,22 +6,37 @@ import Button from '../Button';
 import './styles.scss';
 
 interface Props {
-  submitChanges: (task: Task) => void
+  submitChanges: (task: Task | EditableTask) => void,
+  editableTask: EditableTask | null
 }
 
 interface Task {
   taskName: string,
-  description?: string
+  description: string,
 }
 
-function TaskEditor ({ submitChanges } : Props) {
+interface EditableTask extends Task {
+  index: number | null
+}
+
+function TaskEditor ({ submitChanges, editableTask } : Props) {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    if (editableTask) {
+      setTaskName(editableTask.taskName);
+      setDescription(editableTask.description);
+    } else {
+      setTaskName('');
+      setDescription('');
+    }
+  }, [editableTask])
   const handleTaskNameChange = (e: any) => setTaskName(e.target.value);
   const handleDescriptionChange = (e: any) => setDescription(e.target.value);
   const addTask = () => {
     if (!taskName) return
-    submitChanges({ taskName, description });
+    submitChanges({ taskName, description, index: editableTask ? editableTask.index : null });
     setTaskName('');
     setDescription('');
   }
@@ -32,7 +47,9 @@ function TaskEditor ({ submitChanges } : Props) {
         <Textarea placeholder='Описание задачи' value={description} onChange={handleDescriptionChange} />
       </div>
       <div className='task-editor__buttons'>
-        <Button onClick={addTask}>Создать задачу</Button>
+        <Button onClick={addTask}>
+          {editableTask ? 'Сохранить изменения' : 'Создать задачу'}
+        </Button>
       </div>
     </div>
   )

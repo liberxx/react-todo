@@ -1,14 +1,19 @@
 .todoitem {
   width: 100%;
   display: flex;
+  justify-content: space-between;
   padding: 5px 0 5px 0;
   margin-bottom: 20px;
 }
 
 .todoitem__content {
-  width: 50vw;
+  width: 58vw;
   display: flex;
   flex-direction: column;
+
+  span {
+    word-wrap:break-word;
+  }
 
   span:first-child {
     font-size: 20px;
@@ -24,6 +29,7 @@
 .todoitem__buttons {
   display: flex;
   align-items: center;
+
   span {
     cursor: pointer;
     width: 50px;
@@ -31,11 +37,15 @@
     text-align: center;
   }
 
-  span:hover {
+  span:hover, span:active {
     color: #0066ff;
   }
 
   span:first-child {
     margin-right: 15px;
+  }
+
+  span.active {
+    color: #0066ff;
   }
 }

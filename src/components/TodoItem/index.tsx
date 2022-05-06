@@ -1,5 +1,7 @@
 import React from 'react';
 
+import HighlightedText from '../HighlightedText';
+
 import './styles.scss';
 
 interface Props {
@@ -8,14 +10,15 @@ interface Props {
   description: string,
   removeTask: (index: number) => void,
   markForEditing: (index: number) => void,
-  isEditMode: boolean
+  isEditMode: boolean,
+  highlightedText: string
 }
 
-const TodoItem = ({ taskName, description, removeTask, id, markForEditing, isEditMode }: Props) =>
+const TodoItem = ({ taskName, description, removeTask, id, markForEditing, isEditMode, highlightedText }: Props) =>
   <div className='todoitem'>
     <div className='todoitem__content'>
-      <span>{taskName}</span>
-      <span>{description}</span>
+      <HighlightedText text={taskName} highlight={highlightedText} />
+      <HighlightedText text={description} highlight={highlightedText} />
     </div>
     <div className='todoitem__buttons'>
       <span

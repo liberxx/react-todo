@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 
 import Layout from './components/Layout';
+import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import TodoItem from './components/TodoItem';
 import TaskEditor from './components/TaskEditor';
@@ -54,7 +55,7 @@ function App() {
   const handleSearch = (value: string) => setSearch(value);
   return (
     <Layout>
-      <h1>Список задач</h1>
+      <Header value='Список задач' />
       <SearchBar onSubmit={handleSearch} />
       <ol>
         {filteredList.map(item =>

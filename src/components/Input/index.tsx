@@ -2,7 +2,14 @@ import React from 'react';
 
 import './styles.scss';
 
-const Input = (props: any) =>
-  <input {...props} />
+interface Props {
+  placeholder?: string,
+  name?: string,
+  value: string,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const Input = (props: Props) =>
+  <input type='text' {...props} />
 
 export default Input

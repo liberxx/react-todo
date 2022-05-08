@@ -15,7 +15,7 @@ function HighlightedText ({ text, highlight }: Props) {
     <span>
       {slices.filter(slice => slice.length > 0).map((slice, i) => {
         return regex.test(slice) ? (
-          <mark key={i}>{slice}</mark>
+          <mark key={i} data-testid='marked-text'>{slice}</mark>
         ) : (
           <span key={i}>{slice}</span>
         );

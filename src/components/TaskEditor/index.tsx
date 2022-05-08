@@ -40,7 +40,7 @@ function TaskEditor ({ submitChanges, editableTask } : Props) {
   return (
     <div className='task-editor'>
       <div className='task-editor__fields'>
-        <Input placeholder='Название задачи' value={taskName} onChange={handleTaskNameChange} />
+        <Input data-testid='taskeditor-input' placeholder='Название задачи' value={taskName} onChange={handleTaskNameChange} />
         <Textarea placeholder='Описание задачи' value={description} onChange={handleDescriptionChange} />
       </div>
       <div className='task-editor__buttons'>

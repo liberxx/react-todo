@@ -22,10 +22,15 @@ const TodoItem = ({ taskName, description, removeTask, id, markForEditing, isEdi
     </div>
     <div className='todoitem__buttons'>
       <span
+        data-testid='edit-button'
         className={`fa-solid fa-pen ${isEditMode ? 'active' : ''}`}
         onClick={() => markForEditing(id)}
       />
-      <span onClick={() => removeTask(id)} className='fa-solid fa-trash-can'/>
+      <span
+        data-testid='remove-button'
+        onClick={() => removeTask(id)}
+        className='fa-solid fa-trash-can'
+      />
     </div>
   </div>
 

@@ -14,7 +14,6 @@ export interface Task {
 
 function App() {
   const [list, setList] = useState<Task[]>([]);
-  const [filteredList, setFilteredList] = useState<Task[]>([]);
   const [editTaskId, setEditTaskId] = useState<number | null>(null);
   const [search, setSearch] = useState('');
 
@@ -25,15 +24,13 @@ function App() {
   useEffect(() => {
     localStorage.setItem('todolist', JSON.stringify(list));
   }, [list]);
-  useEffect(() => {
-    setFilteredList(
-      list.filter(
-        task =>
-          task.taskName.toLowerCase().includes(search.toLowerCase()) ||
-          task.description.toLowerCase().includes(search.toLowerCase())
-      )
+
+  const filterList = (list: Task[]) =>
+    list.filter(
+      task =>
+        task.taskName.toLowerCase().includes(search.toLowerCase()) ||
+        task.description.toLowerCase().includes(search.toLowerCase())
     );
-  }, [search, list]);
   const handleTask = (task: Task) => {
     if (task.id !== editTaskId) {
       setList([...list, { ...task, id: task.id }]);
@@ -42,11 +39,11 @@ function App() {
       setList(editedList);
       setEditTaskId(null);
     }
-  }
+  };
   const removeTask = (id: number) : void => {
     setList(list.filter(item => item.id !== id));
     if (id === editTaskId) setEditTaskId(null);
-  }
+  };
   const markForEditing = (id: number) : void => setEditTaskId(id);
   const handleSearch = (value: string) => setSearch(value);
   return (
@@ -54,7 +51,7 @@ function App() {
       <Header value='Список задач' />
       <SearchBar onSubmit={handleSearch} />
       <List
-        todoItems={filteredList}
+        todoItems={filterList(list)}
         removeItem={removeTask}
         editItem={markForEditing}
         editTaskId={editTaskId}
@@ -63,7 +60,7 @@ function App() {
       <TaskEditor
         newTaskId={
           list[list.length - 1]
-            ? list[list.length - 1].id
+            ? list[list.length - 1].id + 1
             : 1
         }
         submitChanges={handleTask}

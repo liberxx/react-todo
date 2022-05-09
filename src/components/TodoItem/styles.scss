@@ -16,12 +16,12 @@
     word-wrap:break-word;
   }
 
-  span:first-child {
+  > span:first-child {
     font-size: 20px;
     font-weight: bold;
   }
 
-  span:last-child {
+  > span:last-child {
     font-size: 16px;
     font-style: italic;
   }

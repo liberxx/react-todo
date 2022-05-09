@@ -4,11 +4,10 @@ import React, { useEffect, useState } from 'react';
 import Layout from './components/Layout';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
-import TodoItem from './components/TodoItem';
 import TaskEditor from './components/TaskEditor';
-import './App.scss';
+import List from './components/List';
 
-interface Task {
+export interface Task {
   taskName: string,
   description: string,
   id: number
@@ -57,21 +56,13 @@ function App() {
     <Layout>
       <Header value='Список задач' />
       <SearchBar onSubmit={handleSearch} />
-      <ol>
-        {filteredList.map(item =>
-          <li
-            key={item.id}
-          >
-            <TodoItem
-              {...item}
-              removeTask={removeTask}
-              markForEditing={markForEditing}
-              isEditMode={editTaskId === item.id}
-              highlightedText={search}
-            />
-          </li>
-        )}
-      </ol>
+      <List
+        todoItems={filteredList}
+        removeItem={removeTask}
+        editItem={markForEditing}
+        editTaskId={editTaskId}
+        searchValue={search}
+      />
       <TaskEditor
         submitChanges={handleTask}
         editableTask={list.find(item => item.id === editTaskId) || null}

@@ -8,8 +8,8 @@ interface Props {
   id: number,
   taskName: string,
   description: string,
-  removeTask: (index: number) => void,
-  markForEditing: (index: number) => void,
+  removeTask: (id: number) => void,
+  markForEditing: (id: number) => void,
   isEditMode: boolean,
   highlightedText: string
 }

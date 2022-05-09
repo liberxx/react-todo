@@ -11,7 +11,7 @@ interface Props {
 
 function SearchBar ({ onSubmit }: Props) {
   const [value, setValue] = useState('');
-  const handleChange = (e: any) => setValue(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
   const filterTodoList = () => onSubmit(value);
   return (
     <div className='search-bar'>

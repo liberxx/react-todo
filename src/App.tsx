@@ -6,7 +6,6 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import TaskEditor from './components/TaskEditor';
 import List from './components/List';
-
 export interface Task {
   taskName: string,
   description: string,
@@ -24,7 +23,7 @@ function App() {
     if (storageData.length) setList(storageData);
   }, []);
   useEffect(() => {
-    localStorage.setItem('todolist', JSON.stringify(list))
+    localStorage.setItem('todolist', JSON.stringify(list));
   }, [list]);
   useEffect(() => {
     setFilteredList(
@@ -35,13 +34,11 @@ function App() {
       )
     );
   }, [search, list]);
-  const handleTask = (task: any) => {
-    if (task.id === null) {
-      setList(list.concat(
-        { ...task, id: list.length ? list[list.length - 1].id + 1 : 1 })
-      );
+  const handleTask = (task: Task) => {
+    if (task.id !== editTaskId) {
+      setList([...list, { ...task, id: task.id }]);
     } else {
-      let editedList = list.map(item => (item.id === task.id) ? task : item);
+      const editedList = list.map(item => (item.id === task.id) ? task : item);
       setList(editedList);
       setEditTaskId(null);
     }
@@ -64,6 +61,11 @@ function App() {
         searchValue={search}
       />
       <TaskEditor
+        newTaskId={
+          list[list.length - 1]
+            ? list[list.length - 1].id
+            : 1
+        }
         submitChanges={handleTask}
         editableTask={list.find(item => item.id === editTaskId) || null}
       />

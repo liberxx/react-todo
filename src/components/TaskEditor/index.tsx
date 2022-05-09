@@ -3,20 +3,17 @@ import React, { useState, useEffect } from 'react';
 import Input from '../Input';
 import Textarea from '../Textarea';
 import Button from '../Button';
+
+import { Task } from '../../App'
 import './styles.scss';
 
 interface Props {
   submitChanges: (task: Task) => void,
-  editableTask: Task | null
+  editableTask: Task | null,
+  newTaskId: number
 }
 
-interface Task {
-  taskName: string,
-  description: string,
-  id: number | null
-}
-
-function TaskEditor ({ submitChanges, editableTask } : Props) {
+function TaskEditor ({ submitChanges, editableTask, newTaskId } : Props) {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
 
@@ -29,11 +26,11 @@ function TaskEditor ({ submitChanges, editableTask } : Props) {
       setDescription('');
     }
   }, [editableTask])
-  const handleTaskNameChange = (e: any) => setTaskName(e.target.value);
-  const handleDescriptionChange = (e: any) => setDescription(e.target.value);
+  const handleTaskNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setTaskName(e.target.value);
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value);
   const saveTask = () => {
     if (!taskName) return
-    submitChanges({ taskName, description, id: editableTask ? editableTask.id : null });
+    submitChanges({ taskName, description, id: editableTask?.id || newTaskId });
     setTaskName('');
     setDescription('');
   }

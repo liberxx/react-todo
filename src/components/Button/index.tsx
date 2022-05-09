@@ -4,7 +4,7 @@ import './styles.scss';
 
 interface Props {
   children: React.ReactNode,
-  onClick: (value : any) => void
+  onClick: () => void
 }
 
 const Button: FunctionComponent<Props> = ({children, ...props}) =>

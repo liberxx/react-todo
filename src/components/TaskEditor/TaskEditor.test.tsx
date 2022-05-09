@@ -10,7 +10,8 @@ const props = {
     taskName: 'Wash car',
     description: 'Drive somewhere and wash it',
     id: 1
-  }
+  },
+  newTaskId: 2
 };
 
 it('should render input, textarea and button', () => {
